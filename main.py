@@ -1,9 +1,10 @@
 import turtle
 import math
 import random
+import time
 
 s = turtle.getscreen()
-s.bgcolor("rosybrown")
+s.bgcolor("grey")
 s.title("Maze Game")
 s.setup(700,700)
 s.tracer(0)
@@ -255,20 +256,21 @@ while True:
     # Iterate through treasure list 
     for treasure in treasures:
         if player.is_collision(treasure):
-            # Add the treasure gold to the player gold 
-            print("Player win!!")
             player.gold += treasure.gold
-            print("Player Gold: {}".format(player.gold))
-            # Destroy the treasure 
-            treasure.destroy()
-            # Remove the treasure from the treasures list 
-            treasures.remove(treasure)
-            turtle.Screen().bye()
+            s.clear()
+            s.bgcolor("grey")
+            turtle.hideturtle()
+            turtle.write("You Win!! Score: {}".format(player.gold), align="center", font= ("Arial", 40, "bold"))
+            time.sleep(3)
+            exit()
 
     for enemy in enemies:
         if player.is_collision(enemy):
-            print("Player dies!!")
-            print("Player Gold: {}".format(player.gold))
-            turtle.Screen().bye()
+            s.clear()
+            s.bgcolor("grey")
+            turtle.hideturtle()
+            turtle.write("You Lose!! Score: {}".format(player.gold), align="center", font= ("Arial", 40, "bold"))
+            time.sleep(3)
+            exit()
 
     s.update()
